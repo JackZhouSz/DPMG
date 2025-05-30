@@ -1,0 +1,301 @@
+<?xml version='1.0'?>
+<!-- Automatically converted from Rhino 5.0 -->
+
+<scene version="0.4.0">
+	<!-- <integrator type="erpt">
+		<boolean name="causticPerturbation" value="false"/>
+		<boolean name="lensPerturbation" value="false"/>
+		<boolean name="multiChainPerturbation" value="false"/>
+		<boolean name="manifoldPerturbation" value="true"/>
+		<integer name="chainLength" value="250"/>
+		<integer name="directSamples" value="64"/>
+		<integer name="maxDepth" value="6"/>
+		<float name="probFactor" value="80"/>
+	</integrator> -->
+	<default name="scale_size" value="20"/>
+	<integrator type="path">
+		<integer name="maxDepth" value="10"/>
+	</integrator>
+	<bsdf type="diffuse" id="mat_donut">
+		<rgb name="reflectance" value=".8,.8,.4"/>
+		<!-- Rhino object 'Donut' -->
+	</bsdf>
+
+	<bsdf type="conductor" id="mat_metal">
+		<string name="material" value="Al"/>
+		<!-- <float name="alpha" value="0.1"/> -->
+	</bsdf>
+
+	<bsdf type="dielectric" id="mat_glass">
+		<!-- Rhino object 'Glass' -->
+		<float name="intIOR" value="1.5"/>
+		<float name="extIOR" value="1.0"/>
+		<!-- <float name="alpha" value="0.05"/> -->
+	</bsdf>
+
+	<bsdf type="diffuse" id="mat_floor">
+		<!-- Rhino object 'Floor' -->
+	</bsdf>
+
+	<bsdf type="diffuse" id="test">
+		<rgb name="reflectance" value=".4,.2,1.0"/>
+	</bsdf>
+
+	<bsdf type="diffuse" id="mat_lamp">
+		<!-- Rhino object 'Lamp' -->
+	</bsdf>
+
+	<!-- <emitter type="constant">
+		<rgb name="radiance" value="1.0"/>
+	</emitter> -->
+
+	<shape type="serialized" id="floor">
+		<string name="filename" value="meshes.serialized"/>
+		<integer name="shapeIndex" value="1"/>
+		<transform name="toWorld">
+			<scale x="2.0" y="2.0"/>
+			<translate x="20" y="25"/>
+		</transform>
+
+		<ref id="mat_floor"/>
+	</shape>
+
+	<!-- <shape type="serialized" id="donut">
+		<string name="filename" value="meshes.serialized"/>
+		<integer name="shapeIndex" value="2"/>
+		<transform name="to_world">
+			<scale value="0.5"/>
+		</transform>
+		<ref id="mat_donut"/>
+	</shape> -->
+
+	<shape type="serialized" id="glass">
+		<string name="filename" value="meshes.serialized"/>
+		<integer name="shapeIndex" value="3"/>
+		<ref id="mat_glass"/>
+	</shape>
+
+	<bsdf type="diffuse" id="ButterflyBSDFYellow">
+		<texture type="bitmap" name="reflectance">
+			<string name="filename" value="textures/butterfly_yellow.jpg"/>
+		</texture>
+	</bsdf>
+	<bsdf type="diffuse" id="ButterflyBSDFBlue">
+		<texture type="bitmap" name="reflectance">
+			<string name="filename" value="textures/butterfly_blue.jpg"/>
+		</texture>
+	</bsdf>
+	<bsdf type="diffuse" id="ButterflyBSDFGreen">
+		<texture type="bitmap" name="reflectance">
+			<string name="filename" value="textures/butterfly_green.jpg"/>
+		</texture>
+	</bsdf>
+
+
+
+	<bsdf type="diffuse" id="SunflowerBSDF">
+		<texture type="bitmap" name="reflectance">
+			<string name="filename" value="textures/sunflower.png"/>
+		</texture>
+	</bsdf>
+
+	<bsdf type="twosided" id="LeafBSDF">
+		<bsdf type="diffuse">
+			<texture type="bitmap" name="reflectance">
+				<string name="filename" value="textures/leaf.jpg"/>
+			</texture>
+		</bsdf>
+	</bsdf>
+
+
+
+
+
+
+	<shape type="serialized" id="foot1">
+		<string name="filename" value="meshes.serialized"/>
+		<integer name="shapeIndex" value="4"/>
+
+		<ref id="mat_metal"/>
+	</shape>
+
+	<shape type="serialized" id="foot2">
+		<string name="filename" value="meshes.serialized"/>
+		<integer name="shapeIndex" value="5"/>
+
+		<ref id="mat_metal"/>
+	</shape>
+
+	<shape type="obj">
+		<string name="filename" value="light.obj"/>
+		<transform name="to_world">
+			<scale value="1"/>
+		</transform>
+		<emitter type="area">
+			<rgb name="radiance" value="5"/>
+		</emitter>
+		<ref id="mat_lamp"/>
+	</shape>
+
+	<!-- <emitter type="point">
+		<point name="position" value="-10.0, -10.0, 15.0"/>
+		<rgb name="intensity" value="1000.0"/>
+	</emitter>
+
+	<emitter type="point">
+		<point name="position" value="-10, 10, 15.0"/>
+		<rgb name="intensity" value="1000.0"/>
+	</emitter>
+
+	<emitter type="point">
+		<point name="position" value="10, -10, 15.0"/>
+		<rgb name="intensity" value="1000.0"/>
+	</emitter>
+
+	<emitter type="point">
+		<point name="position" value="10, 10, 15.0"/>
+		<rgb name="intensity" value="1000.0"/>
+	</emitter>
+
+	<emitter type="point">
+		<point name="position" value="0.0, 0.0, 15.0"/>
+		<rgb name="intensity" value="1000.0"/>
+	</emitter>
+
+	<emitter type="point">
+		<point name="position" value="0.0, 0.0, 1.0"/>
+		<rgb name="intensity" value="1000.0"/>
+	</emitter> -->
+
+	<emitter type="point">
+		<point name="position" value="0.0, -15.0, 5.0"/>
+		<rgb name="intensity" value="600.0"/>
+	</emitter>
+
+	<shape type="ply" id="butterfly">
+		<string name="filename" value="butterfly.ply"/>
+		<ref id="ButterflyBSDFBlue"/>
+		<transform name="toWorld">
+			<translate x="0.75" y="-1.33" z="0.221"/>
+			<rotate x="1" angle="90"/>
+			<scale x="$scale_size" y ="$scale_size" z="$scale_size"/>
+			<translate x="-4" y="-3" z="2.5"/>
+		</transform>
+	</shape>
+
+	<shape type="ply" id="sunflower">
+		<string name="filename" value="sunflower.ply"/>
+		<ref id="SunflowerBSDF"/>
+		<transform name="toWorld">
+			<translate x="0.75" y="-1.33" z="0.221"/>
+			<rotate x="1" angle="90"/>
+			<rotate z="1" angle="180"/>
+			<scale x="$scale_size" y ="$scale_size" z="$scale_size"/>
+			<translate x="4" y="-2" z="2.5"/>
+		</transform>
+	</shape>
+
+	<shape type="ply" id="leaf">
+		<string name="filename" value="leaf.ply"/>
+		<ref id="LeafBSDF"/>
+		<transform name="toWorld">
+			<translate x="1.142" y="-1.666" z="0.215"/>
+			<rotate x="1" angle="90"/>
+			<rotate z="1" angle="180"/>
+			<scale x="$scale_size" y ="$scale_size" z="$scale_size"/>
+			<translate x="2" y="5" z="6"/>
+		</transform>
+	</shape>
+
+	<!-- <shape type="ply" id="sunflower">
+		<string name="filename" value="sunflower.ply"/>
+		<ref id="SunflowerBSDF"/>
+	</shape> -->
+
+	<!-- <sensor type="perspective">
+		<float name="farClip" value="1165.89"/>
+		<float name="focusDistance" value="51.7808"/>
+		<float name="fov" value="30"/>
+		<string name="fovAxis" value="x"/>
+		<float name="nearClip" value="0.00582945"/>
+		<transform name="toWorld">
+
+			<lookat target="-23.69, -37.4261, 29.48" origin="-24.173, -38.184, 30.0076" up="0.261433, 0.446628, 0.855673"/>
+		</transform>
+
+		<sampler type="independent">
+			<integer name="sampleCount" value="256"/>
+		</sampler>
+
+		<film type="hdrfilm">
+			<integer name="height" value="512"/>
+			<integer name="width" value="512"/>
+
+			<rfilter type="gaussian"/>
+		</film>
+	</sensor> -->
+	<!-- <sensor type="perspective">
+		<float name="farClip" value="1165.89"/>
+		<float name="focusDistance" value="51.7808"/>
+		<float name="fov" value="30"/>
+		<string name="fovAxis" value="x"/>
+		<float name="nearClip" value="0.00582945"/>
+		<transform name="toWorld">
+
+			<lookat target="-23.69, -37.4261, 29.48" origin="-24.173, -38.184, 30.0076" up="0.261433, 0.446628, 0.855673"/>
+		</transform>
+
+		<sampler type="independent">
+			<integer name="sampleCount" value="8"/>
+		</sampler>
+
+		<film type="hdrfilm">
+			<integer name="height" value="128"/>
+			<integer name="width" value="128"/>
+
+			<rfilter type="gaussian"/>
+		</film>
+	</sensor> -->
+	<sensor type="perspective">
+		<float name="farClip" value="1165.89"/>
+		<float name="focusDistance" value="51.7808"/>
+		<float name="fov" value="75"/>
+		<string name="fovAxis" value="x"/>
+		<float name="nearClip" value="0.00582945"/>
+		<transform name="toWorld">
+			<lookat target="0, 0, 4" origin="0.1, -20, 8" up="0, 1, 0"/>
+		</transform>
+
+		<sampler type="independent">
+			<integer name="sampleCount" value="256"/>
+		</sampler>
+
+		<film type="hdrfilm">
+			<integer name="height" value="512"/>
+			<integer name="width" value="512"/>
+
+			<rfilter type="gaussian"/>
+		</film>
+	</sensor>
+	<sensor type="perspective">
+		<float name="farClip" value="1165.89"/>
+		<float name="focusDistance" value="51.7808"/>
+		<float name="fov" value="75"/>
+		<string name="fovAxis" value="x"/>
+		<float name="nearClip" value="0.00582945"/>
+		<transform name="toWorld">
+			<lookat target="0, 0, 4" origin="0.1, -20, 8" up="0, 1, 0"/>
+		</transform>
+
+		<sampler type="independent">
+			<integer name="sampleCount" value="256"/>
+		</sampler>
+
+		<film type="hdrfilm">
+			<integer name="height" value="128"/>
+			<integer name="width" value="128"/>
+
+			<rfilter type="gaussian"/>
+		</film>
+	</sensor>
+</scene>
